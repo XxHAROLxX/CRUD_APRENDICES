@@ -1,18 +1,18 @@
 <?php
 
-$server = "localhost";
-$database = "CRUD_APRENDIZ";
-$usuario = "root";
-$contrasenia = "";
-
-$conexion = mysqli_connect($server, $usuario, $contrasenia, $database);
-
-try {
-    if (!$conexion) {
-        throw new Exception("Error de conexión: " . mysqli_connect_error());
-    } else {
-        // echo "Conexión exitosa a la base de datos.";
+class Database{
+    private string $host = "localhost"; 
+    private string $database = "crud_aprendices";
+    private string $user = "root";
+    private string $password = "";
+    
+    public function conexion(){
+        try{
+            $PDO = new PDO("mysql:host=".$this->host.";dbname=".$this->database,$this->user,$this->password);
+            return $PDO;
+        } catch(PDOException $e){
+            return $e->getMessage();
+        }
     }
-} catch (Exception $e) {
-    echo $e->getMessage();
 }
+?>  
