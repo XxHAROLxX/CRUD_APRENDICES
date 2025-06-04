@@ -1,19 +1,31 @@
 <?php
+require_once("c://laragon/www/CRUD_APRENDICES/Controllers/PersonaController.php");
+$obj = new PersonaController();
 
-var_dump($_POST);
-
-include 'conexion.php';
-$id = $_POST['id'];
-$nombre = $_POST['nombre'];
+$id = intval($_POST['id']);
+$primer_nombre = $_POST['primer_nombre'];
+$segundo_nombre = $_POST['segundo_nombre'];
+$primer_apellido = $_POST['primer_apellido'];
+$segundo_apellido = $_POST['segundo_apellido'];
 $fecha_nacimiento = $_POST['fecha_nacimiento'];
+$id_tipo_documento = intval($_POST['id_tipo_documento']);
+$n_documento = $_POST['n_documento'];
+$id_g_sanguineo = intval($_POST['id_g_sanguineo']); 
+$id_f_sanguineo = intval($_POST['id_f_sanguineo']); 
+$id_genero = intval($_POST['id_genero']); 
+$id_programa = intval($_POST['id_programa']); 
 
-$sql = "UPDATE aprendices SET nombre='$nombre', fecha_nacimiento='$fecha_nacimiento' WHERE id=$id";
-$resultado = mysqli_query($conexion, $sql);
-if ($resultado) {
-    echo "<script>alert('Registro actualizado correctamente');</script>";
-    echo "<script>window.location.href='index.php';</script>";
-} else {
-    echo "<script>alert('Error al actualizar el registro');</script>";
-    echo "<script>window.location.href='index.php';</script>";
-}
-mysqli_close($conexion);
+$obj->update(
+    $id,
+    $primer_nombre,
+    $segundo_nombre,
+    $primer_apellido,
+    $segundo_apellido,
+    $fecha_nacimiento,
+    $id_tipo_documento,
+    $n_documento,
+    $id_g_sanguineo,
+    $id_f_sanguineo,
+    $id_genero,
+    $id_programa
+);
