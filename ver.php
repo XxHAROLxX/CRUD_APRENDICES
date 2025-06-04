@@ -1,13 +1,18 @@
 <?php
-include 'conexion.php';
 
-$id = $_GET['id'];
-$sql        = "SELECT * FROM aprendices WHERE id = $id";
-$resultado  = mysqli_query($conexion, $sql);
-$row        = mysqli_fetch_array($resultado);
-$nombre     = $row['nombre'];
-$fecha_nacimiento = $row['fecha_nacimiento'];
-
-echo $nombre;
-echo "<br>";
-echo $fecha_nacimiento;
+class Database{
+    private string $host = "localhost"; 
+    private string $database = "crud_aprendices";
+    private string $user = "root";
+    private string $password = "";
+    
+    public function conexion(){
+        try{
+            $PDO = new PDO("mysql:host=".$this->host.";dbname=".$this->database,$this->user,$this->password);
+            return $PDO;
+        } catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+}
+?>  
